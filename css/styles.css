@@ -111,3 +111,4 @@ html,body{overflow-x:clip}h1,h2{text-transform:uppercase}
 
 .wip-card img{aspect-ratio:3/4}.masonry .g-item{transform:none!important;opacity:1!important}
 @media(prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none}}
+@media(max-width:600px){.hero-logo{max-width:240px}}
