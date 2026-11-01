@@ -112,3 +112,12 @@ html,body{overflow-x:clip}h1,h2{text-transform:uppercase}
 .wip-card img{aspect-ratio:3/4}.masonry .g-item{transform:none!important;opacity:1!important}
 @media(prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none}}
 @media(max-width:600px){.hero-logo{max-width:240px}}
+
+/* hero badge: natural aspect ratio + float/tilt, entrance */
+.hero-badge{order:2;justify-self:end;align-self:center;width:min(43vw,600px);filter:drop-shadow(0 24px 46px rgba(0,0,0,.55));animation:badge-in .75s .12s cubic-bezier(.2,.8,.2,1) both}
+.hero-badge .hero-logo{display:block;width:100%;max-width:none;height:auto;aspect-ratio:940/626;object-fit:contain;filter:none;order:0;margin:0;animation:badge-float 6s ease-in-out infinite}
+@keyframes badge-float{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-12px) rotate(1deg)}}
+@keyframes badge-in{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+@media(max-width:960px){.hero-badge{order:0;justify-self:center;width:min(84vw,420px)}}
+@media(max-width:600px){.hero-badge{width:min(80vw,320px)}}
+@media(prefers-reduced-motion:reduce){.hero-badge,.hero-badge .hero-logo{animation:none!important;opacity:1;transform:none}}
