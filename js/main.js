@@ -3,10 +3,11 @@ const nav=document.getElementById('nav'),bar=document.querySelector('.progress')
 addEventListener('scroll',()=>{const y=scrollY;nav.classList.toggle('scrolled',y>40);bar.style.width=(y/(document.documentElement.scrollHeight-innerHeight)*100)+'%';
  if(!rm&&hb&&y<innerHeight)hb.style.translate=`0 ${y*.35}px`},{passive:true});
 const b=document.querySelector('.burger'),m=document.getElementById('menu');b.onclick=()=>{const o=m.classList.toggle('open');b.setAttribute('aria-expanded',o)};m.querySelectorAll('a').forEach(a=>a.onclick=()=>m.classList.remove('open'));
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:0,rootMargin:'0px 0px -5% 0px'});
 window.observeReveal=el=>rm?el.classList.add('in'):io.observe(el);document.querySelectorAll('.reveal').forEach(observeReveal);
+const revealAll=()=>document.documentElement.classList.add('reveal-all');setTimeout(revealAll,1500);addEventListener('load',()=>setTimeout(revealAll,300));
 const cio=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const el=e.target,t=+el.dataset.count,d=+(el.dataset.dec||0);cio.unobserve(el);
- if(rm)return;const s=performance.now();const f=n=>{const p=Math.min((n-s)/1600,1),v=t*(1-Math.pow(1-p,3));el.textContent=v.toFixed(d);if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)}),{threshold:.5});
+ if(rm)return;const s=performance.now();const f=n=>{const p=Math.min((n-s)/1600,1),v=t*(1-Math.pow(1-p,3));el.textContent=v.toFixed(d);if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)}),{threshold:0});
 document.querySelectorAll('[data-count]').forEach(e=>{if(!rm&&e.getBoundingClientRect().top>innerHeight){e.textContent=(0).toFixed(+(e.dataset.dec||0))}cio.observe(e)});
 document.querySelectorAll('.filters button').forEach(btn=>btn.onclick=()=>{document.querySelectorAll('.filters button').forEach(x=>x.classList.remove('active'));btn.classList.add('active');const f=btn.dataset.filter;
  document.querySelectorAll('.g-item').forEach(g=>g.classList.toggle('hide',f!=='all'&&g.dataset.cat!==f))});

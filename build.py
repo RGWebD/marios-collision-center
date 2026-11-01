@@ -1,3 +1,4 @@
+from PIL import Image
 import re,html
 photos=[l for l in open('photo-list.txt').read().splitlines() if l.startswith('- gbp')]
 items=[]
@@ -6,10 +7,10 @@ for l in photos:
     cat={'beforeafter':'repair'}.get(cat,cat)
     items.append((f,d,cat))
 labels={'repair':'Body Repair','paint':'Paint','car':'Finished Rides','shop':'The Shop'}
-gal='\n'.join(f'<figure class="g-item reveal" data-cat="{c}"><img src="assets/gallery/{f}" alt="{html.escape(d)}" loading="lazy"><figcaption>{html.escape(d)}</figcaption></figure>' for f,d,c in items)
+gal='\n'.join(f'<figure class="g-item" data-cat="{c}"><img src="assets/gallery/{f}" width="{Image.open('assets/gallery/'+f).width}" height="{Image.open('assets/gallery/'+f).height}" decoding="async" alt="{html.escape(d)}" loading="lazy"><figcaption>{html.escape(d)}</figcaption></figure>' for f,d,c in items)
 wip=['gbp-beforeafter-01.jpg','gbp-repair-03.jpg','gbp-repair-10.jpg','gbp-repair-11.jpg','gbp-repair-12.jpg','gbp-paint-02.jpg','gbp-repair-06.jpg','gbp-repair-04.jpg']
 dmap={f:d for f,d,c in items}
-wiphtml='\n'.join(f'<div class="wip-card"><img src="assets/gallery/{f}" alt="{html.escape(dmap[f])}" loading="lazy"><span>{html.escape(dmap[f])}</span></div>' for f in wip)
+wiphtml='\n'.join(f'<div class="wip-card"><img src="assets/gallery/{f}" width="{Image.open('assets/gallery/'+f).width}" height="{Image.open('assets/gallery/'+f).height}" decoding="async" alt="{html.escape(dmap[f])}" loading="lazy"><span>{html.escape(dmap[f])}</span></div>' for f in wip)
 reviews=[("Louie Ponce","7 months ago","Mario was the most humble and kind man around. The work he did on our Tesla was incredible and we were impressed how well he did. He took a little over a day to knock it out and we were really happy with the results. The value of his work was worth more than what he charged, so huge plus!"),
 ("Shanissa F","3 months ago","I am so impressed by the work and timeliness with the repairs for my car. I brought in my Mazda CX-5 for a quote and was followed up shortly after with a detailed copy of what the cost for repairs would be. It was very competitive compared …"),
 ("Beth Clarke","3 years ago","Mario and his staff are amazing. They explained everything to me so that I understood exactly what was wrong with my vehicle. They serviced my car quickly and at a great price. I would highly recommend them."),
